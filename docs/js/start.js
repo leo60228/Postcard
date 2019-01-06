@@ -2,12 +2,22 @@ var fileSelector = document.getElementById('map-bin-selector');
 var authorSelector = document.getElementById('author-name');
 var mapNameSelector = document.getElementById('map-name');
 var download = () => {};
-document.getElementById('form').addEventListener('submit', e => {
+document.getElementById('form').addEventListener('submit', async e => {
   e.preventDefault();
   var author = slugify(authorSelector.value, '_');
+  var uri = URL.createObjectURL(fileSelector.files[0]);
+  var data = new CogBinEl();
+  await CogBinElLoader.load(null, data, new CogDataWebSrc(), uri);
+  URL.revokeObjectURL(uri);
   var mapName = mapNameSelector.value;
   var levelsetSlug = slugify(mapName, '_');
-  var bin = fileSelector.value.split(/(\\|\/)/g).pop();
+  var bin = '';
+  try {
+    bin = data.children.filter(e => e.name == 'meta')[0].attributes.Name + '.bin';
+    console.log(`[Postcard] Read map name: ${bin}`);
+  } catch (ex) {
+    bin = fileSelector.value.split(/(\\|\/)/g).pop();
+  }
   var dialog = createDialog({levelset: mapName, level: mapName, levelset_id: levelsetSlug, author, bin});
   var yaml = everestYaml(levelsetSlug);
   var zip = new JSZip();
@@ -18,9 +28,8 @@ document.getElementById('form').addEventListener('submit', e => {
   var authorFolder = mapsFolder.folder(author);
   var levelsetFolder = authorFolder.folder(levelsetSlug);
   levelsetFolder.file(bin, fileSelector.files[0]);
-  zip.generateAsync({type: 'blob'}).then(function(content) {
-    download = () => saveAs(content, `${levelsetSlug}.zip`);
-    document.body.className += ' done';
-  });
+  var content = await zip.generateAsync({type: 'blob'});
+  download = () => saveAs(content, `${levelsetSlug}.zip`);
+  document.body.className += ' done';
 });
 document.getElementById('download-button').addEventListener('click', () => download());

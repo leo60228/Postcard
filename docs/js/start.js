@@ -36,7 +36,7 @@ document.getElementById('form').addEventListener('submit', async e => {
     let readName = data.children.filter(e => e.name == 'meta')[0].attributes.Name;
     if (readName !== undefined) {
       console.log(`[Postcard] Read map name: ${bin}`);
-    }
+    } else throw 'No map name exists in metadata (this is not an error)';
   } catch (ex) {
     console.warn(`[Postcard] Error locating map name: ${ex}`);
     bin = name();

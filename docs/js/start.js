@@ -33,9 +33,12 @@ document.getElementById('form').addEventListener('submit', async e => {
   }
   let bin = '';
   try {
-    bin = data.children.filter(e => e.name == 'meta')[0].attributes.Name + '.bin';
-    console.log(`[Postcard] Read map name: ${bin}`);
+    let readName = data.children.filter(e => e.name == 'meta')[0].attributes.Name;
+    if (readName !== undefined) {
+      console.log(`[Postcard] Read map name: ${bin}`);
+    }
   } catch (ex) {
+    console.warn(`[Postcard] Error locating map name: ${ex}`);
     bin = name();
   }
   let dialog = createDialog({levelset: mapName, level: mapName, levelset_id: levelsetSlug, author, bin});

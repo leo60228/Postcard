@@ -1,2 +1,0 @@
-#!/bin/sh
-julia_10 --color=yes --depwarn=no -q -i -- genie.jl s "$@"

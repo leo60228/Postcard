@@ -20,28 +20,9 @@ let download = () => {};
 document.getElementById('form').addEventListener('submit', async e => {
   e.preventDefault();
   let author = slugify(authorSelector.value, '_');
-  let data = new CogBinEl();
   let mapName = mapNameSelector.value;
   let levelsetSlug = slugify(mapName, '_');
-  let uri = URL.createObjectURL(blob());
-  try {
-    await CogBinElLoader.load(null, data, new CogDataWebSrc(), uri);
-    URL.revokeObjectURL(uri);
-  } catch (e) {
-    console.error('[Postcard] Error: Invalid map!')
-    return;
-  }
-  let bin = '';
-  try {
-    let readName = data.children.filter(e => e.name == 'meta')[0].attributes.Name;
-    if (readName) {
-      bin = `${readName}.bin`;
-      console.log(`[Postcard] Read map name: ${bin}`);
-    } else throw 'No map name exists in metadata (this is not an error)';
-  } catch (ex) {
-    console.warn(`[Postcard] Error locating map name: ${ex}`);
-    bin = name();
-  }
+  let bin = name();
   let dialog = createDialog({levelset: mapName, level: mapName, levelset_id: levelsetSlug, author, bin});
   let yaml = everestYaml(levelsetSlug);
   let zip = new JSZip();

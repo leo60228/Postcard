@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Postcard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Aegis7Gaming/Discord-Invite-JS-HTML-CSS@9f472fccda3029493d2a1a5028cb43e50dba7adb/discordInvite.css" />
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles/nes.css" />
+    <link rel="stylesheet" href="../styles/main.css" />
+  </head>
+  <body>
+    <div class="center-parent">
+      <form id="form">
+        <div class="homepage-flexbox">
+          <label><span class="padded-span">Select a map bin to import:</span><input required type="file" id="map-bin-selector"></label>
+          <label><span class="padded-span">Author's name:</span><input required id="author-name" value=""></label>
+          <label><span class="padded-span">Name of the map:</span><input required id="map-name" value=""></label>
+          <input type="submit" class="nes-btn is-primary" id="submit-button" value="Go!">
+        </div>
+      </form>
+      <div class="homepage-flexbox finished-screen">
+        <p>Your map is ready!</p>
+        <input type="button" class="nes-btn is-success" id="download-button" value="Download">
+      </div>
+    </div>
+
+    <script src="../js/slugify.js"></script>
+    <script src="../js/yaml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+    <script src="../js/maplib.js"></script>
+    <script src="../js/start.js"></script>
+  </body>
+</html>

@@ -2,7 +2,6 @@
 **/*.rs.bk
 Cargo.lock
 bin/
-pkg/
 wasm-pack.log
 # App
 build/*
@@ -45,6 +44,5 @@ Thumbs.db
 
 # NPM packages folder.
 node_modules/
-img.png
-mask.png
-out.png
+/img.png
+/out.png

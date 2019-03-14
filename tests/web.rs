@@ -2,12 +2,13 @@
 
 #![cfg(target_arch = "wasm32")]
 
-extern crate wasm_bindgen_test;
 use wasm_bindgen_test::*;
 
-wasm_bindgen_test_configure!(run_in_browser);
-
 #[wasm_bindgen_test]
-fn pass() {
-    assert_eq!(1 + 1, 2);
+fn mask() {
+    let img_buf = include_bytes!("./img.png");
+    let mask_buf = include_bytes!("./mask.png");
+    let verify_buf = include_bytes!("./out.png");
+    let masked = postcard::mask(img_buf, mask_buf).unwrap();
+    assert_eq!(masked.as_ref(), &verify_buf[..]);
 }

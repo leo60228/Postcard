@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Postcard</title>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles/nes.css" />
+    <link rel="stylesheet" href="../styles/main.css" />
+  </head>
+  <body>
+    <div class="center-parent">
+      <form id="form">
+        <div class="homepage-flexbox">
+          <label><span class="padded-span">Select a checkpoint to use:</span><input required type="file" id="img-selector"></label>
+          <input type="submit" class="nes-btn is-primary" id="submit-button" value="Go!">
+        </div>
+      </form>
+      <div class="homepage-flexbox finished-screen">
+        <p>Your image is ready!</p>
+        <img src="" alt="Checkpoint" id="checkpoint"></img>
+      </div>
+    </div>
+
+    <script type="module" src="../js/mask.js"></script>
+  </body>
+</html>

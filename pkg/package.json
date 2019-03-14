@@ -1,0 +1,14 @@
+{
+  "name": "postcard",
+  "collaborators": [
+    "leo60228 <iakornfeld@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "postcard_bg.wasm",
+    "postcard.js",
+    "postcard.d.ts"
+  ],
+  "browser": "postcard.js",
+  "types": "postcard.d.ts"
+}

@@ -17,8 +17,8 @@ cfg_if! {
 
 #[wasm_bindgen]
 pub fn mask(img: &[u8], mask: &[u8]) -> Option<Box<[u8]>> {
-    let mut img = load_from_memory(img).ok()?.to_rgba();
     let mask = load_from_memory(mask).ok()?.to_rgba();
+    let mut img = load_from_memory(img).ok()?.resize(mask.width(), mask.height(), FilterType::CatmullRom).to_rgba();
 
     for (x, y, px) in img.enumerate_pixels_mut() {
         px.channels_mut()[3] = mask.get_pixel(x, y).channels()[3];

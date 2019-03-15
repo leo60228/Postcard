@@ -49,6 +49,7 @@ html, body, pre, code, kbd, samp {
     width: 720px;
     height: 480px;
     user-select: none;
+    -webkit-mask-image: url(../mask.png);
     mask-image: url(../mask.png);
 }
 

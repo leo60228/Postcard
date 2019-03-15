@@ -45,6 +45,13 @@ html, body, pre, code, kbd, samp {
     display: initial;
 }
 
+#checkpoint:not(.finished) {
+    width: 720px;
+    height: 480px;
+    user-select: none;
+    mask-image: url(../mask.png);
+}
+
 html, body {
     width: 100%;
     height: 100%;

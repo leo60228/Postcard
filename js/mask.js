@@ -16,17 +16,21 @@ let maskDl = fetch('../mask.bin').then(e => e.arrayBuffer()).then(e => new Uint8
 document.getElementById('form').addEventListener('submit', async e => {
     e.preventDefault();
 
-    document.body.className += 'done';
+    let imgBuf = await new Response(imgSelector.files[0]).arrayBuffer();
+    let img = new Uint8Array(imgBuf);
+    let srcBlob = new Blob([img], {type: imgSelector.files[0].type});
+    let srcUrl = URL.createObjectURL(srcBlob);
+    checkpoint.src = srcUrl;
+    document.body.className += ' done';
 
     await initialization;
 
     let mask = await maskDl;
-    let imgBuf = await new Response(imgSelector.files[0]).arrayBuffer();
-    let img = new Uint8Array(imgBuf);
     //console.profile();
     let masked = wasm_bindgen.mask(img, mask);
     //console.profileEnd();
     let blob = new Blob([masked], {type: 'image/png'});
     let url = URL.createObjectURL(blob);
+    checkpoint.className += ' finished';
     checkpoint.src = url;
 });

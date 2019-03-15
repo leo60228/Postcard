@@ -22,10 +22,13 @@ pub fn mask(img: &[u8], mask: &[u8]) -> Option<Box<[u8]>> {
     let img = load_from_memory(img).ok()?;
 
     let mut img = if img.width() != mask.width() || img.height() != mask.height() {
-        img.resize(mask.width(), mask.height(), FilterType::Triangle).to_rgba()
+        img.resize_to_fill(mask.width(), mask.height(), FilterType::Triangle).to_rgba()
     } else {
         img.to_rgba()
     };
+
+    assert_eq!(img.width(), mask.width());
+    assert_eq!(img.height(), mask.height());
 
     for (px1, px2) in img.pixels_mut().zip(mask.pixels()) {
         px1.channels_mut()[3] = px2.channels()[3];

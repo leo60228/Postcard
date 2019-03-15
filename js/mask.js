@@ -16,6 +16,8 @@ let maskDl = fetch('../mask.bin').then(e => e.arrayBuffer()).then(e => new Uint8
 document.getElementById('form').addEventListener('submit', async e => {
     e.preventDefault();
 
+    document.body.className += 'done';
+
     await initialization;
 
     let mask = await maskDl;
@@ -27,5 +29,4 @@ document.getElementById('form').addEventListener('submit', async e => {
     let blob = new Blob([masked], {type: 'image/png'});
     let url = URL.createObjectURL(blob);
     checkpoint.src = url;
-    document.body.className += 'done';
 });
